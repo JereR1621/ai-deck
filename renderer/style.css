@@ -1,0 +1,858 @@
+/* AI DECK - Retro-OS & Hardware Synth Edition.
+   Inspirado en Macintosh System 7 (halftone/tinta solida) y modulos DSP de audio.
+   Cada tema define los mismos tokens en claro y en oscuro. */
+:root {
+  --mono: "Consolas", "Cascadia Mono", monospace;
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius-sm: 4px;
+  --radius-md: 7px;
+}
+
+/* ---------- SKY (celeste retro + papel crema) ---------- */
+:root,
+:root[data-palette="sky"] {
+  --accent: #8fd3ff;
+  --accent-mid: #58b8f5;
+  --accent-strong: #1b7fcc;
+  --surface-2: #e3f2fd;
+  --ink: #102538;
+  --muted: #57758c;
+  --surface: #fbfaf5;
+  --term-bg: #f7fcff;
+  --grid: #cfe4f2;
+  --warn: #d99b00;
+  --warn-ink: #9e6d00;
+  --bad: #d93834;
+  --dim: #b8cddb;
+  --install: #ffe799;
+  --bad-soft: #ffd6d6;
+  --emboss: rgba(255, 255, 255, .75);
+  --shadow: #102538;
+  --preview: rgba(88, 184, 245, .38);
+}
+:root[data-theme="dark"],
+:root[data-palette="sky"][data-theme="dark"] {
+  --accent: #183e59;
+  --accent-mid: #23587d;
+  --accent-strong: #58b8f5;
+  --surface-2: #102230;
+  --ink: #d7eefc;
+  --muted: #769bb5;
+  --surface: #0b1620;
+  --term-bg: #0d1b26;
+  --grid: #173245;
+  --warn: #e0aa22;
+  --warn-ink: #f0ca5b;
+  --bad: #ff7b75;
+  --dim: #264054;
+  --install: #42330d;
+  --bad-soft: #421917;
+  --emboss: rgba(255, 255, 255, .08);
+  --shadow: #04090e;
+  --preview: rgba(88, 184, 245, .28);
+}
+
+/* ---------- MATRIX (verde Mac/GameBoy retro + fosforo oscuro) ---------- */
+:root[data-palette="matrix"] {
+  --accent: #6ee88a;
+  --accent-mid: #38c25b;
+  --accent-strong: #116b29;
+  --surface-2: #e3f7e8;
+  --ink: #0a2410;
+  --muted: #4b7856;
+  --surface: #faf8f0;
+  --term-bg: #f4fff6;
+  --grid: #c9e8d0;
+  --warn: #b88600;
+  --warn-ink: #7d5b00;
+  --bad: #c0392b;
+  --dim: #b5d4bc;
+  --install: #e3f5b8;
+  --bad-soft: #ffdbd6;
+  --emboss: rgba(255, 255, 255, .75);
+  --shadow: #0a2410;
+  --preview: rgba(56, 194, 91, .35);
+}
+:root[data-palette="matrix"][data-theme="dark"] {
+  --accent: #0f3d1c;
+  --accent-mid: #196b2d;
+  --accent-strong: #39ff6a;
+  --surface-2: #07170b;
+  --ink: #a6ffbd;
+  --muted: #4c9962;
+  --surface: #030b05;
+  --term-bg: #030b05;
+  --grid: #0e2915;
+  --warn: #c9d94a;
+  --warn-ink: #e3f06a;
+  --bad: #ff6b6b;
+  --dim: #183b21;
+  --install: #2a3d12;
+  --bad-soft: #3d1414;
+  --emboss: rgba(57, 255, 106, .12);
+  --shadow: #000000;
+  --preview: rgba(57, 255, 106, .25);
+}
+
+/* ---------- NEON (synthwave magenta y cian) ---------- */
+:root[data-palette="neon"] {
+  --accent: #ffaddc;
+  --accent-mid: #e452b0;
+  --accent-strong: #9e1178;
+  --surface-2: #fae8f4;
+  --ink: #24082b;
+  --muted: #7d5f87;
+  --surface: #fcf9f5;
+  --term-bg: #fffafd;
+  --grid: #ebd3e4;
+  --warn: #c98a00;
+  --warn-ink: #8a5f00;
+  --bad: #d12d4e;
+  --dim: #d9bfd3;
+  --install: #ffe5bd;
+  --bad-soft: #ffd4df;
+  --emboss: rgba(255, 255, 255, .78);
+  --shadow: #24082b;
+  --preview: rgba(228, 82, 176, .32);
+}
+:root[data-palette="neon"][data-theme="dark"] {
+  --accent: #3d1152;
+  --accent-mid: #7722a6;
+  --accent-strong: #ff3ea5;
+  --surface-2: #140924;
+  --ink: #efe8ff;
+  --muted: #9a82c4;
+  --surface: #090412;
+  --term-bg: #0a0514;
+  --grid: #211138;
+  --warn: #ffc857;
+  --warn-ink: #ffd98a;
+  --bad: #ff5c8a;
+  --dim: #311d4f;
+  --install: #3d2a12;
+  --bad-soft: #3d1426;
+  --emboss: rgba(255, 62, 165, .14);
+  --shadow: #020005;
+  --preview: rgba(38, 245, 255, .28);
+}
+
+/* ---------- AMBER (monitor CRT ambar + crema calido) ---------- */
+:root[data-palette="amber"] {
+  --accent: #ffd48a;
+  --accent-mid: #e09a2c;
+  --accent-strong: #945500;
+  --surface-2: #faeedb;
+  --ink: #2e1c03;
+  --muted: #856a4c;
+  --surface: #fcf8ee;
+  --term-bg: #fffaf0;
+  --grid: #ebd9be;
+  --warn: #b57c00;
+  --warn-ink: #7d5500;
+  --bad: #c0392b;
+  --dim: #d9c7ad;
+  --install: #ffeab3;
+  --bad-soft: #ffd9d4;
+  --emboss: rgba(255, 255, 255, .78);
+  --shadow: #2e1c03;
+  --preview: rgba(224, 154, 44, .34);
+}
+:root[data-palette="amber"][data-theme="dark"] {
+  --accent: #4f3300;
+  --accent-mid: #7d5204;
+  --accent-strong: #ffb000;
+  --surface-2: #171002;
+  --ink: #ffdea6;
+  --muted: #9e7d46;
+  --surface: #0d0801;
+  --term-bg: #0f0a02;
+  --grid: #261a04;
+  --warn: #ffd24a;
+  --warn-ink: #ffe28a;
+  --bad: #ff7a5c;
+  --dim: #3b2a0c;
+  --install: #4a3708;
+  --bad-soft: #3d1a12;
+  --emboss: rgba(255, 176, 0, .12);
+  --shadow: #000000;
+  --preview: rgba(255, 176, 0, .25);
+}
+
+/* ---------- PAPER (manual tecnico / imprenta) ---------- */
+:root[data-palette="paper"] {
+  --accent: #d0d5dd;
+  --accent-mid: #9aa3b2;
+  --accent-strong: #3b4452;
+  --surface-2: #eaecef;
+  --ink: #161b22;
+  --muted: #606a78;
+  --surface: #f7f5f0;
+  --term-bg: #fafbfc;
+  --grid: #d8dce2;
+  --warn: #b07c00;
+  --warn-ink: #7a5600;
+  --bad: #c0392b;
+  --dim: #c5cbd4;
+  --install: #ede2c2;
+  --bad-soft: #ffd9d4;
+  --emboss: rgba(255, 255, 255, .8);
+  --shadow: #161b22;
+  --preview: rgba(141, 151, 166, .35);
+}
+:root[data-palette="paper"][data-theme="dark"] {
+  --accent: #2c3440;
+  --accent-mid: #455061;
+  --accent-strong: #b8c4d4;
+  --surface-2: #15191f;
+  --ink: #e4eaf0;
+  --muted: #8793a3;
+  --surface: #0c0f14;
+  --term-bg: #0e1116;
+  --grid: #1f252e;
+  --warn: #e0b64a;
+  --warn-ink: #f0d184;
+  --bad: #ff8a80;
+  --dim: #2b3240;
+  --install: #3d3620;
+  --bad-soft: #3a1f1c;
+  --emboss: rgba(255, 255, 255, .08);
+  --shadow: #030406;
+  --preview: rgba(170, 182, 198, .25);
+}
+
+/* ---------- MONO (1-bit puro) ---------- */
+:root[data-palette="mono"] {
+  --accent: #e4e4e4;
+  --accent-mid: #b8b8b8;
+  --accent-strong: #000000;
+  --surface-2: #ededed;
+  --ink: #000000;
+  --muted: #5c5c5c;
+  --surface: #ffffff;
+  --term-bg: #ffffff;
+  --grid: #dcdcdc;
+  --warn: #946b00;
+  --warn-ink: #5e4300;
+  --bad: #b71c1c;
+  --dim: #c4c4c4;
+  --install: #ede6cf;
+  --bad-soft: #fad4d4;
+  --emboss: rgba(255, 255, 255, .9);
+  --shadow: #000000;
+  --preview: rgba(0, 0, 0, .16);
+}
+:root[data-palette="mono"][data-theme="dark"] {
+  --accent: #222222;
+  --accent-mid: #444444;
+  --accent-strong: #ffffff;
+  --surface-2: #121212;
+  --ink: #ffffff;
+  --muted: #8c8c8c;
+  --surface: #000000;
+  --term-bg: #000000;
+  --grid: #1f1f1f;
+  --warn: #e0b64a;
+  --warn-ink: #f0d184;
+  --bad: #ff6b6b;
+  --dim: #333333;
+  --install: #3a3420;
+  --bad-soft: #3a1818;
+  --emboss: rgba(255, 255, 255, .12);
+  --shadow: #4d4d4d;
+  --preview: rgba(255, 255, 255, .2);
+}
+
+/* ---------- animaciones clave ---------- */
+@keyframes pulseLed {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.22); opacity: .55; }
+}
+
+@keyframes floatHint {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-4px); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(5px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes winOpen {
+  from { opacity: 0; transform: scale(.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes msgSlide {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spinOnce {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes marchBorder {
+  to { background-position: 16px 0; }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%; margin: 0;
+  display: flex; flex-direction: column;
+  font-family: var(--mono);
+  color: var(--ink);
+  background: var(--surface);
+  overflow: hidden;
+  user-select: none;
+  transition: background-color .25s ease, color .2s ease;
+}
+
+/* ---------- cabecera ---------- */
+#bar {
+  position: relative;
+  display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap;
+  padding: 10px 18px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 4px,
+      color-mix(in srgb, var(--ink) 7%, transparent) 4px 6px
+    ),
+    var(--accent);
+  border-bottom: 3px solid var(--ink);
+  box-shadow: inset 0 2px 0 var(--emboss);
+}
+
+/* Placa de marca tipo rack de sintetizador con icono de chip/altavoz */
+#brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 4px 12px 4px 8px;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: 3px 3px 0 var(--shadow);
+  font-size: 19px; font-weight: 700; letter-spacing: 2.5px;
+  cursor: default;
+  transition: transform .2s var(--spring), box-shadow .2s var(--spring);
+}
+#brand:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+/* Icono cuadrado con punto central */
+#brand::before {
+  content: "";
+  width: 18px; height: 18px;
+  border: 2px solid var(--ink);
+  background: radial-gradient(circle, var(--ink) 42%, transparent 45%);
+  animation: pulseLed 3.8s ease-in-out infinite;
+}
+
+#folder-box {
+  display: flex; align-items: center; gap: 10px;
+  flex: 1 1 340px; min-width: 0;
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  padding: 4px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+}
+
+/* Etiquetas de seccion estilo hardware: [ 01 // CARPETA ] */
+.lbl {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700; color: var(--ink);
+  letter-spacing: 1.2px; white-space: nowrap;
+  padding: 3px 7px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+.lbl::before {
+  content: "";
+  width: 5px; height: 5px;
+  background: var(--accent-strong);
+  border: 1px solid var(--ink);
+}
+
+.field {
+  flex: 1; min-width: 0;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 6px 11px; font-size: 12.5px; font-weight: 700;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  user-select: text;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, .08);
+}
+
+/* ---------- botones mecanicos retro ---------- */
+.btn {
+  position: relative;
+  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  color: var(--ink); background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 6px 13px; cursor: pointer;
+  box-shadow: 3px 3px 0 var(--shadow), inset 0 1px 0 var(--emboss);
+  transition:
+    transform .18s var(--spring),
+    box-shadow .18s var(--spring),
+    background-color .14s ease;
+}
+.btn:hover:not(:disabled) {
+  background: var(--accent);
+  transform: translate(-1px, -2px);
+  box-shadow: 4px 5px 0 var(--shadow), inset 0 1px 0 var(--emboss);
+}
+.btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--shadow);
+  transition-duration: .04s;
+}
+.btn:disabled {
+  color: var(--muted); border-color: var(--dim);
+  box-shadow: 2px 2px 0 var(--dim); cursor: not-allowed;
+}
+.btn.unknown {
+  color: var(--muted); border-color: var(--muted);
+  box-shadow: 2px 2px 0 var(--dim); border-style: dashed;
+  background: color-mix(in srgb, var(--surface) 70%, var(--surface-2));
+}
+.btn.unknown:hover:not(:disabled) {
+  color: var(--ink); border-color: var(--ink);
+  background: var(--surface);
+}
+.btn.icon { font-size: 15px; line-height: 1; padding: 7px 10px; }
+.btn.icon.lang { font-size: 11px; font-weight: 700; padding: 9px 10px; letter-spacing: 1px; }
+.btn.spinning { animation: spinOnce .5s var(--spring); }
+
+.btn.pal { display: flex; align-items: center; gap: 7px; padding: 7px 11px; }
+.btn.pal .sw {
+  width: 13px; height: 13px;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  transition: transform .22s var(--spring);
+}
+.btn.pal:hover .sw { transform: rotate(15deg) scale(1.1); }
+.btn.pal .caret { font-size: 9px; color: var(--ink); }
+
+/* selector de paletas */
+.palbox {
+  position: fixed; z-index: 9800;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 6px 6px 0 var(--shadow);
+  padding: 6px;
+  animation: popIn .18s var(--spring) both;
+}
+.palrow {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  font-family: var(--mono); font-size: 12px; color: var(--ink);
+  background: none; border: 1.5px solid transparent; border-radius: 4px;
+  padding: 6px 10px; cursor: pointer; text-align: left;
+  transition: background-color .12s ease, transform .15s var(--spring), border-color .12s ease;
+}
+.palrow:hover {
+  background: var(--accent);
+  border-color: var(--ink);
+  transform: translateX(2px);
+}
+.palrow.on {
+  background: var(--surface-2);
+  border-color: var(--ink);
+  font-weight: 700;
+}
+.palrow.on .nm::after { content: " \25CF"; color: var(--accent-strong); }
+.palrow .sw { width: 14px; height: 14px; border: 1.5px solid var(--ink); border-radius: 2px; }
+.palrow .nm { white-space: nowrap; }
+
+.btn.install { border-style: dashed; background: var(--install); }
+.btn.install .tag { color: var(--ink); font-weight: 700; opacity: 1; }
+.win.installing .win-bar { background: var(--install); }
+
+/* Etiqueta inferior dentro de cada boton de agente */
+.btn .tag {
+  display: block;
+  font-size: 9px; font-weight: 700;
+  margin-top: 3px; padding: 1px 5px;
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  border-radius: 2px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+/* ---------- barra de agentes y vista (rack de modulos) ---------- */
+#launcher {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 18px;
+  background: var(--surface-2);
+  border-bottom: 2px solid var(--ink);
+}
+#agents { display: flex; gap: 9px; flex-wrap: wrap; }
+#agents .btn {
+  animation: popIn .25s var(--spring) both;
+  animation-delay: calc(var(--i, 0) * 32ms);
+}
+
+/* Divisor con linea punteada */
+.sep {
+  flex: 1 1 24px; min-width: 12px; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--muted) 0 6px, transparent 6px 12px);
+  opacity: .55;
+  margin: 0 4px;
+}
+
+/* ---------- escritorio con tramado Halftone / Dither ---------- */
+#desk {
+  position: relative;
+  flex: 1; min-height: 0;
+  background-color: var(--surface);
+  background-image:
+    radial-gradient(var(--grid) 1.25px, transparent 1.25px),
+    radial-gradient(var(--grid) 1.25px, var(--surface) 1.25px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  overflow: hidden;
+}
+
+/* Tarjeta central de ayuda estilo dialogo de Mac OS clasico */
+#desk::after {
+  content: attr(data-hint);
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 85%;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  box-shadow: 6px 6px 0 var(--shadow);
+  text-align: center; color: var(--ink); font-size: 12px; font-weight: 700;
+  letter-spacing: .5px; pointer-events: none;
+  opacity: var(--hint, 1);
+  animation: floatHint 4.5s ease-in-out infinite;
+  transition: opacity .22s ease;
+}
+
+/* ---------- ventana de consola ---------- */
+.win {
+  position: absolute;
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 6px 6px 0 var(--shadow);
+  min-width: 280px; min-height: 160px;
+  overflow: hidden;
+  animation: winOpen .22s var(--spring);
+  transition:
+    left .22s var(--smooth),
+    top .22s var(--smooth),
+    width .22s var(--smooth),
+    height .22s var(--smooth),
+    box-shadow .18s ease;
+}
+.win.active {
+  box-shadow: 8px 8px 0 var(--shadow);
+}
+.win.dragging,
+.win.resizing {
+  transition: box-shadow .12s ease, opacity .12s ease !important;
+}
+.win.dragging {
+  opacity: .92;
+  box-shadow: 12px 12px 0 var(--shadow);
+}
+
+/* Barra de titulo con rayas horizontales de Mac OS clasico */
+.win-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 9px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 3px,
+      color-mix(in srgb, var(--ink) 12%, transparent) 3px 4px
+    ),
+    var(--surface-2);
+  cursor: grab;
+  border-bottom: 2px solid var(--ink);
+}
+.win.dragging .win-bar { cursor: grabbing; }
+.win.active .win-bar {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 3px,
+      color-mix(in srgb, var(--ink) 14%, transparent) 3px 4px
+    ),
+    var(--accent);
+}
+
+/* Titulo en placa solida para que las rayas de la barra no lo tapen */
+.win-title {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 2px 9px;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 var(--shadow);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+/* LED de estado. Solo late en la ventana activa o instalando: una animacion
+   infinita por consola mantiene a Chromium repintando sin parar. */
+.win-title::before {
+  content: "";
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent-strong);
+  border: 1.5px solid var(--ink);
+}
+.win.active .win-title::before { animation: pulseLed 3s ease-in-out infinite; }
+.win.installing .win-title::before {
+  background: var(--warn);
+  animation: pulseLed 1s ease-in-out infinite;
+}
+.win.dead .win-title::before {
+  background: var(--surface);
+  animation: none;
+}
+
+.win-sub {
+  padding: 1px 7px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border-radius: 3px;
+  font-size: 10px; font-weight: 700; color: var(--ink); opacity: .78;
+  flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.win.snapped {
+  box-shadow: 3px 3px 0 var(--shadow);
+  border-radius: 5px;
+}
+.win.snapped.active {
+  box-shadow: 0 0 0 1px var(--ink), 4px 4px 0 var(--shadow);
+}
+
+.win-snap,
+.win-x {
+  font-family: var(--mono); font-size: 12px; font-weight: 700; line-height: 1;
+  width: 22px; height: 20px; cursor: pointer;
+  border-radius: 3px;
+  background: var(--surface); color: var(--ink);
+  border: 1.5px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow);
+  transition: transform .15s var(--spring), background-color .12s ease, box-shadow .15s ease;
+}
+.win-snap { font-size: 13px; width: 24px; }
+.win-snap:hover {
+  background: var(--accent);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+.win-x:hover {
+  background: var(--bad); color: #fff;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+.win-snap:active,
+.win-x:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 var(--shadow);
+}
+
+.win-body {
+  flex: 1; min-height: 0; padding: 6px;
+  background: var(--term-bg);
+}
+.win-body .xterm { height: 100%; }
+
+/* Esquina de redimensionado con textura punteada de hardware */
+.win-grip {
+  position: absolute; right: 0; bottom: 0; width: 17px; height: 17px;
+  cursor: nwse-resize;
+  border-top: 1.5px solid var(--ink);
+  border-left: 1.5px solid var(--ink);
+  border-top-left-radius: 3px;
+  background:
+    repeating-linear-gradient(135deg, var(--ink) 0 2px, var(--surface) 2px 4px);
+  opacity: .75;
+  transition: opacity .15s ease, transform .15s var(--spring);
+}
+.win:hover .win-grip { opacity: 1; }
+.win-grip:hover { transform: scale(1.12); background: var(--accent); }
+
+.win.dead .win-bar { background: var(--dim); }
+.win.dead .win-title { color: var(--muted); }
+
+/* ---------- acople y divisores con tramado Dither ---------- */
+.snap-preview {
+  position: absolute; display: none; z-index: 9000; pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--preview) 0 8px,
+      transparent 8px 16px
+    );
+  border: 3px dashed var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--shadow);
+  transition: left .14s var(--smooth), top .14s var(--smooth), width .14s var(--smooth), height .14s var(--smooth);
+}
+
+.divider {
+  position: absolute; z-index: 8500;
+  background: transparent;
+  transition: background-color .15s ease;
+}
+.divider.v { width: 6px; cursor: ew-resize; }
+.divider.h { height: 6px; cursor: ns-resize; }
+.divider:hover {
+  background:
+     radial-gradient(var(--ink) 1px, var(--accent-strong) 1px) 0 0 / 4px 4px;
+}
+
+.picker {
+  position: absolute; z-index: 9500;
+  display: flex; gap: 8px; flex-wrap: wrap; width: 226px;
+  padding: 10px; background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: 6px 6px 0 var(--shadow);
+  animation: popIn .18s var(--spring) both;
+}
+.ptpl {
+  position: relative; width: 66px; height: 46px;
+  background: var(--surface-2); border: 2px solid var(--ink);
+  border-radius: 3px; overflow: hidden;
+  transition: transform .15s var(--spring), box-shadow .15s var(--spring);
+}
+.ptpl:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+.ptpl span {
+  position: absolute; cursor: pointer;
+  border: 1.5px solid var(--ink); border-radius: 2px;
+  background: var(--surface);
+  transform: scale(.85); transform-origin: center;
+  transition: background-color .12s ease, transform .15s var(--spring);
+}
+.ptpl span:hover {
+  background: var(--accent-mid);
+  transform: scale(.93);
+}
+
+/* ---------- seccion de consumo ---------- */
+#usage {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 8px 18px;
+  background: var(--surface-2);
+  border-top: 2px solid var(--ink);
+}
+#usage-cards { display: flex; gap: 9px; flex-wrap: wrap; flex: 1; }
+#usage-at {
+  font-size: 10px; font-weight: 700; color: var(--muted);
+  padding: 3px 7px;
+  border: 1px dashed var(--muted);
+  border-radius: 3px;
+}
+
+/* Cada tarjeta tiene un medidor de nivel horizontal en la base (usa --pct de app.js) */
+.ucard {
+  position: relative;
+  display: flex; align-items: baseline; gap: 8px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent-mid) 25%, transparent) var(--pct, 0%), transparent var(--pct, 0%)),
+    var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+  box-shadow: 3px 3px 0 var(--shadow);
+  padding: 5px 11px 7px; font-size: 11px;
+  overflow: hidden;
+  animation: popIn .22s var(--spring) both;
+  animation-delay: calc(var(--i, 0) * 38ms);
+  transition: transform .18s var(--spring), box-shadow .18s var(--spring);
+}
+.ucard::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  height: 3px; width: var(--pct, 0%);
+  background: var(--accent-strong);
+  transition: width .4s var(--smooth);
+}
+.ucard:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 4px 5px 0 var(--shadow);
+}
+.ucard .who {
+  font-weight: 700; letter-spacing: 1px;
+  padding-right: 6px;
+  border-right: 1.5px dashed var(--muted);
+}
+.ucard .num { font-size: 13.5px; font-weight: 700; color: var(--accent-strong); }
+.ucard .of { color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.ucard .dot { color: var(--ink); margin: 0 3px; font-weight: 700; }
+
+.ucard.low {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--warn) 25%, transparent) var(--pct, 0%), transparent var(--pct, 0%)),
+    var(--surface);
+}
+.ucard.low::after { background: var(--warn); }
+.ucard.low .num { color: var(--warn-ink); }
+
+.ucard.bad {
+  border-color: var(--bad);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bad) 22%, transparent) var(--pct, 0%), transparent var(--pct, 0%)),
+    var(--surface);
+}
+.ucard.bad::after { background: var(--bad); }
+.ucard.bad .num, .ucard.bad .of { color: var(--bad); font-size: 11px; font-weight: 700; }
+
+.ucard.wait {
+  border-style: dashed; border-color: var(--muted);
+  color: var(--muted); box-shadow: none;
+}
+
+/* ---------- pie de estado ---------- */
+#status {
+  display: flex; justify-content: space-between; align-items: center;
+  flex: 0 0 28px; padding: 0 18px;
+  font-size: 11px; font-weight: 700; color: var(--ink);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 12px,
+      color-mix(in srgb, var(--ink) 4%, transparent) 12px 13px
+    ),
+    var(--surface);
+  border-top: 2px solid var(--ink);
+}
+#msg { display: inline-flex; align-items: center; gap: 6px; }
+#msg::before {
+  content: "▸";
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+#msg.flash { animation: msgSlide .2s var(--smooth); }
+#msg.err { color: var(--bad); font-weight: 700; }
+#msg.err::before { content: "▲"; color: var(--bad); }
+
+/* Contador en etiqueta invertida */
+#count {
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 2px;
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

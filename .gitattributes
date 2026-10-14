@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+# cmd.exe y Windows PowerShell 5.1 esperan CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+*.ico binary
+*.bmp binary
+*.png binary

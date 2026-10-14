@@ -1,0 +1,23 @@
+# Dependencias: se reinstalan con `npm install`
+node_modules/
+
+# Builds: electron-builder escribe en C:\AI-DECK\dist, pero por si se cambia la salida
+dist/
+*.exe
+*.blockmap
+builder-debug.yml
+builder-effective-config.yaml
+
+# Logs y estado local (la config real vive en %USERPROFILE%\.config\ai-hub)
+*.log
+*.old
+path.tmp
+npm-debug.log*
+
+# Ajustes locales de Claude Code
+.claude/settings.local.json
+
+# Basura de Windows / OneDrive
+Thumbs.db
+desktop.ini
+*.tmp

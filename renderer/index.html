@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<!-- Solo scripts y estilos propios; nada remoto. 'unsafe-inline' en estilos porque
+     xterm posiciona filas y cursor con atributos style y una hoja <style> propia. -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+<title>AI DECK</title>
+<link rel="stylesheet" href="../node_modules/@xterm/xterm/css/xterm.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="bar">
+    <div id="brand">[ AI&nbsp;DECK ]</div>
+    <div id="folder-box">
+      <span class="lbl" data-i18n="secFolder">01 // CARPETA</span>
+      <div class="field"><span id="folder">—</span></div>
+      <button id="browse" class="btn" data-i18n="browse">EXAMINAR</button>
+    </div>
+    <button id="palette" class="btn pal" data-i18n-title="paletteTitle"></button>
+    <button id="theme" class="btn icon" data-i18n-title="themeTitle">&#x263D;</button>
+    <button id="lang" class="btn icon lang">EN</button>
+  </header>
+
+  <nav id="launcher">
+    <span class="lbl" data-i18n="secAgents">02 // AGENTES</span>
+    <div id="agents"></div>
+    <button id="redetect" class="btn icon" data-i18n-title="redetect">&#x21bb;</button>
+    <span class="sep"></span>
+    <span class="lbl" data-i18n="secView">03 // VISTA</span>
+    <button id="tile" class="btn" data-i18n="tile" data-i18n-title="tileTitle">MOSAICO</button>
+    <button id="cascade" class="btn" data-i18n="cascade" data-i18n-title="cascadeTitle">CASCADA</button>
+    <button id="logbtn" class="btn" data-i18n="log" data-i18n-title="logTitle">LOG</button>
+  </nav>
+
+  <main id="desk"></main>
+
+  <section id="usage">
+    <span class="lbl" data-i18n="secUsage">04 // CONSUMO</span>
+    <div id="usage-cards"></div>
+    <button id="usage-refresh" class="btn icon" data-i18n-title="usageRefresh">&#x21bb;</button>
+    <span id="usage-at"></span>
+  </section>
+
+  <footer id="status">
+    <span id="msg"></span>
+    <span id="count"></span>
+  </footer>
+
+  <script src="../node_modules/@xterm/xterm/lib/xterm.js"></script>
+  <script src="../node_modules/@xterm/addon-fit/lib/addon-fit.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

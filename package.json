@@ -1,0 +1,96 @@
+{
+  "name": "ai-deck",
+  "version": "1.1.0",
+  "description": "Consolas de agentes IA (Claude, Antigravity, DeepSeek, OpenCode) en una sola app de escritorio",
+  "author": "AI DECK",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "icon": "powershell -ExecutionPolicy Bypass -File build/make-icon.ps1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postdist": "powershell -NoProfile -Command \"Get-ChildItem C:/AI-DECK/dist/AI-DECK-Setup-*.exe | Sort-Object LastWriteTime | Select-Object -Last 1 | Copy-Item -Destination 'C:/AI-DECK/AI-DECK-Setup.exe' -Force\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@lydell/node-pty": "^1.2.0-beta.15",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0"
+  },
+  "devDependencies": {
+    "electron": "^44.7.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.aideck.desktop",
+    "productName": "AI DECK",
+    "directories": {
+      "output": "C:/AI-DECK/dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "**/*",
+      "!ai-hub.ps1",
+      "!AI-DECK.cmd",
+      "!CLAUDE.md",
+      "!package-lock.json",
+      "!build/**",
+      "!README.md",
+      "!.gitignore",
+      "!.claude/**",
+      "!*.exe",
+      "!**/*.pdb",
+      "!**/*.map"
+    ],
+    "electronLanguages": [
+      "es",
+      "es-419",
+      "en-US"
+    ],
+    "asarUnpack": [
+      "**/node_modules/@lydell/**"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AI DECK",
+      "artifactName": "AI-DECK-Setup-${version}.exe",
+      "uninstallDisplayName": "AI DECK",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "portable": {
+      "artifactName": "AI-DECK-${version}-portable.exe",
+      "splashImage": "build/splash.bmp",
+      "unpackDirName": true
+    },
+    "electronFuses": {
+      "runAsNode": true,
+      "enableCookieEncryption": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true
+    }
+  }
+}
