@@ -38,6 +38,8 @@
       "!README.md",
       "!.gitignore",
       "!.claude/**",
+      "!.github/**",
+      "!.gitattributes",
       "!*.exe",
       "!**/*.pdb",
       "!**/*.map"

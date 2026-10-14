@@ -1,0 +1,63 @@
+# Compila el instalador y el portable en un runner limpio de Windows, desde el
+# codigo del repo. SignPath solo firma binarios construidos asi, nunca en un PC.
+#
+# - Manual (pestana Actions > Build > Run workflow): compila y deja los .exe como artefacto.
+# - Al subir un tag v* (git tag v1.2.0 && git push --tags): ademas crea una release
+#   en borrador con los .exe, para revisarla y publicarla a mano.
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # La salida local es C:\AI-DECK\dist (fuera de OneDrive); en CI se deja dentro
+      # del workspace. Se llama a electron-builder directo para saltar `postdist`.
+      - name: Compilar
+        run: npx electron-builder --win --publish never -c.directories.output=dist
+
+      - name: Subir artefacto
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-deck-windows
+          path: |
+            dist/*.exe
+          if-no-files-found: error
+
+      # Firma con SignPath: se activa cuando el proyecto este aprobado y existan
+      # el secreto SIGNPATH_API_TOKEN y los datos de la organizacion.
+      # - uses: signpath/github-action-submit-signing-request@v1
+      #   with:
+      #     api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+      #     organization-id: '<id de organizacion>'
+      #     project-slug: 'ai-deck'
+      #     signing-policy-slug: 'release-signing'
+      #     github-artifact-id: ${{ steps.upload.outputs.artifact-id }}
+      #     wait-for-completion: true
+      #     output-artifact-directory: dist/signed
+
+      - name: Release en borrador
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $exes = Get-ChildItem dist -Filter *.exe | ForEach-Object FullName
+          gh release create $env:GITHUB_REF_NAME @exes --draft --title "AI DECK $($env:GITHUB_REF_NAME.TrimStart('v'))" --generate-notes
