@@ -2,7 +2,15 @@
   "name": "ai-deck",
   "version": "1.1.0",
   "description": "Consolas de agentes IA (Claude, Antigravity, DeepSeek, OpenCode) en una sola app de escritorio",
-  "author": "AI DECK",
+  "author": "JereR1621",
+  "homepage": "https://github.com/JereR1621/ai-deck",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JereR1621/ai-deck.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JereR1621/ai-deck/issues"
+  },
   "main": "main.js",
   "scripts": {
     "start": "electron .",

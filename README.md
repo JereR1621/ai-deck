@@ -68,6 +68,11 @@ pueden sumar agentes propios:
 Los ejecutables estan en [Releases](../../releases). Se compilan con GitHub Actions
 ([`.github/workflows/build.yml`](.github/workflows/build.yml)) a partir de este codigo, en un runner limpio.
 
+La firma de codigo de los ejecutables la provee [SignPath.io](https://about.signpath.io) con un
+certificado de [SignPath Foundation](https://signpath.org) (ver [Code signing policy](#code-signing-policy)).
+Mientras la solicitud esta pendiente, las versiones publicadas no estan firmadas y Windows SmartScreen
+puede avisar la primera vez (Mas informacion > Ejecutar de todas formas).
+
 ## Desinstalar
 
 - **Instalador:** Configuracion de Windows > Aplicaciones > Aplicaciones instaladas > **AI DECK** >
